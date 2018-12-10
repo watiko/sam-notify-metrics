@@ -1,0 +1,5 @@
+export SLACK_HOOK_URL="https://hooks.slack.com/services/XXX/YYY/ZZZ"
+export SLACK_CHANNEL="any_channel"
+export SAM_BUCKET_NAME="YOUR_BUCKET"
+export CFN_STACK_NAME="YOUR_CFN_STACK_NAME"
+export SNS_CO2_ALARM_TOPIC="arn:aws:sns:ap-northeast-1:300000000000:your-sns-topic-name"

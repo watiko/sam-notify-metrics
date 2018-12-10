@@ -1,0 +1,13 @@
+node_modules/
+
+# parcel
+.cache/
+dist/
+
+*.log
+
+# sam
+packaged.yaml
+
+# direnv
+.envrc
