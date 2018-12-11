@@ -27,6 +27,12 @@ Resources:
           Properties:
             Topic: !Ref SNSCo2AlarmTopic
 
+  Co2MetricsNotifyFnLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${Co2MetricsNotifyFn}
+      RetentionInDays: 14
+
 Outputs:
   Co2MetricsNotifyFn:
     Value: !GetAtt Co2MetricsNotifyFn.Arn
