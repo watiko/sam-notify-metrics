@@ -32,4 +32,4 @@ Outputs:
     Value: !GetAtt Co2MetricsNotifyFn.Arn
 
   Co2MetricsNotifyFnIamRole:
-    Value: !GetAtt Co2MetricsNotifyFn.Arn
+    Value: !GetAtt Co2MetricsNotifyFnRole.Arn
