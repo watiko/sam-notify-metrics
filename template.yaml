@@ -1,36 +1,35 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: センサーから得た値を処理する Lambda を管理
 
 Parameters:
-    SlackChannel:
-        Type: String
-    SlackHookUrl:
-        Type: String
-    SNSCo2AlarmTopic:
-        Type: String
+  SlackChannel:
+    Type: String
+  SlackHookUrl:
+    Type: String
+  SNSCo2AlarmTopic:
+    Type: String
 
 Resources:
-    Co2MetricsNotifyFn:
-        Type: AWS::Serverless::Function
-        Properties:
-            CodeUri: dist/co2
-            Handler: index.handler
-            Runtime: nodejs8.10
-            Environment:
-                Variables:
-                    SLACK_CHANNEL: !Ref SlackChannel
-                    SLACK_HOOK_URL: !Ref SlackHookUrl
-            Events:
-                SNSCo2Alarm:
-                    Type: SNS
-                    Properties:
-                        Topic: !Ref SNSCo2AlarmTopic
+  Co2MetricsNotifyFn:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: dist/co2
+      Handler: index.handler
+      Runtime: nodejs8.10
+      Environment:
+        Variables:
+          SLACK_CHANNEL: !Ref SlackChannel
+          SLACK_HOOK_URL: !Ref SlackHookUrl
+      Events:
+        SNSCo2Alarm:
+          Type: SNS
+          Properties:
+            Topic: !Ref SNSCo2AlarmTopic
 
 Outputs:
+  Co2MetricsNotifyFn:
+    Value: !GetAtt Co2MetricsNotifyFn.Arn
 
-    Co2MetricsNotifyFn:
-      Value: !GetAtt Co2MetricsNotifyFn.Arn
-
-    Co2MetricsNotifyFnIamRole:
-      Value: !GetAtt Co2MetricsNotifyFn.Arn
+  Co2MetricsNotifyFnIamRole:
+    Value: !GetAtt Co2MetricsNotifyFn.Arn
