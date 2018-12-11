@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "parcel build lambdas/co2/index.ts --out-dir dist/co2 --out-file index",
+    "build": "parcel build --target node  --bundle-node-modules lambdas/co2/index.ts --out-dir dist/co2 --out-file index",
     "package": "sam package --template-file template.yaml --output-template-file packaged.yaml --s3-bucket $SAM_BUCKET_NAME",
     "deploy": "sam deploy --template-file packaged.yaml --stack-name $CFN_STACK_NAME $(npm run -s deploy:param) --capabilities CAPABILITY_IAM",
     "deploy:param": "echo --parameter-overrides \"SlackHookUrl=$SLACK_HOOK_URL\" \"SlackChannel=$SLACK_CHANNEL\" \"SNSCo2AlarmTopic=$SNS_CO2_ALARM_TOPIC\"",
