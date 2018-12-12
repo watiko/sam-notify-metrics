@@ -17,10 +17,22 @@ Resources:
       CodeUri: dist/co2
       Handler: index.handler
       Runtime: nodejs8.10
+      Timeout: 5
       Environment:
         Variables:
           SLACK_CHANNEL: !Ref SlackChannel
           SLACK_HOOK_URL: !Ref SlackHookUrl
+          IMAGE_BUCKET_NAME: !Ref ImageBucket
+      Policies:
+        - S3FullAccessPolicy:
+            BucketName: !Ref ImageBucket
+        - Version: 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action:
+                - cloudwatch:GetMetricWidgetImage
+              Resource:
+                - "*"
       Events:
         SNSCo2Alarm:
           Type: SNS
@@ -32,6 +44,14 @@ Resources:
     Properties:
       LogGroupName: !Sub /aws/lambda/${Co2MetricsNotifyFn}
       RetentionInDays: 14
+
+  ImageBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      LifecycleConfiguration:
+        Rules:
+          - ExpirationInDays: 365
+            Status: Enabled
 
 Outputs:
   Co2MetricsNotifyFn:
