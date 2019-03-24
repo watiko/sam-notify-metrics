@@ -1,9 +1,9 @@
 'use strict';
 
 import { Callback, SNSEvent, SNSHandler } from 'aws-lambda';
-// import * as CloudWatch from 'aws-sdk/clients/cloudwatch';
-// import * as S3 from 'aws-sdk/clients/s3';
-import { CloudWatch, S3 } from 'aws-sdk';
+import CloudWatch = require('aws-sdk/clients/cloudwatch');
+import S3 = require('aws-sdk/clients/s3');
+
 import * as https from 'https';
 import * as url from 'url';
 import { promisify } from 'util';
